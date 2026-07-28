@@ -220,6 +220,54 @@ footer span{color:var(--accent);}
 
 @media(max-width:768px){.lic-grid{grid-template-columns:1fr 1fr;}}
 
+/* ══════════ CHATBOT WIDGET ══════════ */
+#chatToggle{position:fixed;bottom:20px;right:26px;width:86px;height:96px;cursor:pointer;z-index:2000;display:flex;align-items:flex-end;justify-content:center;}
+.mascot-float{animation:mascotFloat 3.2s ease-in-out infinite;transform-origin:center bottom;}
+@keyframes mascotFloat{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-7px) rotate(-2deg);}}
+.mascot-arm-l{animation:waveArm 2.4s ease-in-out infinite;transform-origin:62px 62px;}
+@keyframes waveArm{0%,20%,100%{transform:rotate(0deg);}5%{transform:rotate(-24deg);}10%{transform:rotate(-4deg);}15%{transform:rotate(-24deg);}}
+.mascot-eye{animation:mascotBlink 4.2s ease-in-out infinite;transform-origin:center;}
+@keyframes mascotBlink{0%,92%,100%{transform:scaleY(1);}95%{transform:scaleY(.1);}}
+#chatToggle:hover .mascot-float{animation-duration:.9s;}
+.mascot-shadow{fill:rgba(0,0,0,.35);}
+.mascot-bubble{position:absolute;bottom:98px;right:18px;background:var(--s2);border:1px solid var(--border);color:var(--text);font-size:11px;padding:8px 12px;border-radius:12px;border-bottom-right-radius:3px;white-space:nowrap;box-shadow:0 6px 20px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .35s ease, transform .35s ease;transform:translateY(6px);z-index:2001;}
+.mascot-bubble.show{opacity:1;transform:translateY(0);}
+.chat-toggle-dot{position:absolute;top:2px;right:14px;width:12px;height:12px;border-radius:50%;background:var(--green);border:2px solid #000;animation:blink 1.8s infinite;z-index:2;}
+#chatToggle:hover{transform:scale(1.04);}
+#chatToggle.excited .mascot-float{animation:mascotJump .5s ease 2;}
+@keyframes mascotJump{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-16px) rotate(4deg);}}
+.chat-toggle-dot{position:absolute;top:2px;right:2px;width:12px;height:12px;border-radius:50%;background:var(--green);border:2px solid #000;animation:blink 1.8s infinite;}
+#chatPanel{position:fixed;bottom:96px;right:26px;width:340px;max-width:90vw;height:460px;max-height:70vh;background:var(--s1);border:1px solid var(--border);border-radius:18px;display:none;flex-direction:column;overflow:hidden;z-index:2000;box-shadow:0 20px 60px rgba(0,0,0,.6);cursor:default;}
+#chatPanel.open{display:flex;animation:chatIn .3s ease both;}
+@keyframes chatIn{from{opacity:0;transform:translateY(16px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+.chat-header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--s2);border-bottom:1px solid var(--border);}
+.chat-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#1a6fd6);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+.chat-title{font-size:13px;font-weight:700;}
+.chat-status{font-size:10.5px;color:var(--sub);display:flex;align-items:center;gap:5px;margin-top:1px;}
+.chat-status-dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;}
+.chat-close{cursor:pointer;color:var(--sub);font-size:14px;padding:4px;}
+.chat-close:hover{color:var(--text);}
+.chat-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;}
+.chat-body::-webkit-scrollbar{width:4px;}
+.chat-msg{max-width:85%;padding:10px 13px;border-radius:14px;font-size:12.5px;line-height:1.6;font-weight:300;white-space:pre-line;}
+.chat-msg.bot{background:var(--s3);color:var(--text);align-self:flex-start;border-bottom-left-radius:4px;}
+.chat-msg.user{background:var(--accent);color:#fff;align-self:flex-end;border-bottom-right-radius:4px;}
+.chat-quick-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px;}
+.chat-quick{background:rgba(41,151,255,.1);border:1px solid rgba(41,151,255,.25);color:var(--accent);font-size:11px;padding:7px 12px;border-radius:20px;cursor:pointer;transition:.2s;}
+.chat-quick:hover{background:rgba(41,151,255,.2);}
+.chat-input-row{display:flex;gap:8px;padding:12px;border-top:1px solid var(--border);background:var(--s2);}
+.chat-input{flex:1;background:var(--s3);border:1px solid var(--border);border-radius:20px;padding:10px 16px;color:var(--text);font-size:12.5px;font-family:'Inter',sans-serif;outline:none;}
+.chat-input:focus{border-color:var(--accent);}
+.chat-send{width:36px;height:36px;border-radius:50%;background:var(--accent);border:none;color:#fff;font-size:14px;cursor:pointer;flex-shrink:0;transition:.2s;}
+.chat-send:hover{background:#1a6fd6;}
+.chat-form{background:var(--s3);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px;margin-top:2px;}
+.chat-form input,.chat-form textarea{background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:9px 11px;color:var(--text);font-size:12px;font-family:'Inter',sans-serif;outline:none;}
+.chat-form input:focus,.chat-form textarea:focus{border-color:var(--accent);}
+.chat-form textarea{min-height:60px;resize:vertical;}
+.chat-form-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px;font-size:12px;font-weight:600;cursor:pointer;}
+.chat-form-btn:hover{background:#1a6fd6;}
+.chat-wa-btn{display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;text-decoration:none;font-size:12px;font-weight:600;padding:9px 14px;border-radius:8px;margin-top:4px;width:fit-content;}
+@media(max-width:480px){#chatPanel{right:12px;bottom:88px;width:calc(100vw - 24px);}#chatToggle{right:12px;bottom:12px;width:70px;height:80px;}.mascot-bubble{right:6px;bottom:84px;}}
 </style>
 </head>
 <body>
@@ -276,6 +324,7 @@ footer span{color:var(--accent);}
         LinkedIn
       </a>
       <a href="tel:6380421140" class="btn-p" style="background:var(--green);box-shadow:0 0 24px rgba(48,209,88,.3);">📞 +91 6380421140</a>
+      <a href="Suresh_S_Resume.pdf" download="Suresh_S_Resume.pdf" class="btn-g">📄 Download Resume</a>
       <a href="#contact" class="btn-g">Get in Touch</a>
     </div>
   </div>
@@ -1079,6 +1128,14 @@ footer span{color:var(--accent);}
       <div class="clink-icon">📍</div>
       <div><div class="clink-label">Location</div><div class="clink-val">Bengaluru, Karnataka, India</div></div>
     </div>
+    <a href="https://wa.me/916380421140?text=Hi%20Suresh%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect." target="_blank" class="clink">
+      <div class="clink-icon">💬</div>
+      <div><div class="clink-label">WhatsApp</div><div class="clink-val">+91 6380421140</div></div>
+    </a>
+    <a href="Suresh_S_Resume.pdf" download="Suresh_S_Resume.pdf" class="clink">
+      <div class="clink-icon">📄</div>
+      <div><div class="clink-label">Resume</div><div class="clink-val">Download PDF</div></div>
+    </a>
   </div>
   <div class="contact-form reveal">
     <h3 style="font-size:20px;font-weight:700;margin-bottom:6px;">Send a Message</h3>
@@ -1102,6 +1159,71 @@ footer span{color:var(--accent);}
     </div>
     <button class="btn-send" id="sendBtn" onclick="sendMail()"><span id="btnText">Send Message →</span></button>
     <p style="font-size:11px;color:var(--sub);margin-top:10px;text-align:center;">🔒 Powered by EmailJS · Sends directly to Suresh's inbox</p>
+  </div>
+</div>
+
+<!-- ══════════ CHATBOT WIDGET ══════════ -->
+<div class="mascot-bubble" id="mascotBubble">Need any help? 👋</div>
+<div id="chatToggle" onclick="toggleChat()">
+  <span class="chat-toggle-dot"></span>
+  <svg class="mascot-float" width="72" height="90" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+    <ellipse class="mascot-shadow" cx="50" cy="112" rx="22" ry="5"/>
+    <!-- legs -->
+    <rect x="38" y="86" width="9" height="20" rx="4" fill="#1a6fd6"/>
+    <rect x="53" y="86" width="9" height="20" rx="4" fill="#1a6fd6"/>
+    <!-- body -->
+    <rect x="30" y="52" width="40" height="40" rx="16" fill="#2997ff"/>
+    <!-- right arm (static, down) -->
+    <rect x="66" y="58" width="10" height="26" rx="5" fill="#2997ff"/>
+    <!-- left arm waving -->
+    <g class="mascot-arm-l">
+      <rect x="24" y="46" width="10" height="26" rx="5" fill="#2997ff"/>
+    </g>
+    <!-- head -->
+    <circle cx="50" cy="34" r="26" fill="#fdf6ec"/>
+    <!-- ears/antenna -->
+    <circle cx="50" cy="6" r="4" fill="#30d158"/>
+    <rect x="48.5" y="6" width="3" height="12" fill="#c9c9cf"/>
+    <!-- hair -->
+    <path d="M26 26 C 26 8, 74 8, 74 26 C 68 20, 60 17, 50 17 C 40 17, 32 20, 26 26 Z" fill="#2b2b2b"/>
+    <!-- eyes -->
+    <ellipse class="mascot-eye" cx="41" cy="36" rx="3.2" ry="4" fill="#2b2b2b"/>
+    <ellipse class="mascot-eye" cx="59" cy="36" rx="3.2" ry="4" fill="#2b2b2b"/>
+    <!-- cheeks -->
+    <ellipse cx="34" cy="42" rx="3.5" ry="2.2" fill="#ff9f9f" opacity=".55"/>
+    <ellipse cx="66" cy="42" rx="3.5" ry="2.2" fill="#ff9f9f" opacity=".55"/>
+    <!-- smile -->
+    <path d="M42 45 Q50 51 58 45" stroke="#2b2b2b" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<div id="chatPanel">
+  <div class="chat-header">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="chat-avatar">S</div>
+      <div>
+        <div class="chat-title">Suresh's Assistant</div>
+        <div class="chat-status"><span class="chat-status-dot"></span>Usually replies instantly</div>
+      </div>
+    </div>
+    <div class="chat-close" onclick="toggleChat()">✕</div>
+  </div>
+
+  <div class="chat-body" id="chatBody">
+    <div class="chat-msg bot">Hi! 👋 I'm an assistant trained on Suresh's resume. Ask me about his skills, experience, projects, or how to reach him.</div>
+    <div class="chat-quick-row" id="chatQuickRow">
+      <div class="chat-quick" onclick="askChat('Skills')">🛠 Skills</div>
+      <div class="chat-quick" onclick="askChat('Experience')">💼 Experience</div>
+      <div class="chat-quick" onclick="askChat('Projects')">🚙 Projects</div>
+      <div class="chat-quick" onclick="askChat('Resume')">📄 Resume</div>
+      <div class="chat-quick" onclick="askChat('Contact')">📞 Contact</div>
+      <div class="chat-quick" onclick="openChatLeaveMsg()">📩 Leave a Message</div>
+    </div>
+  </div>
+
+  <div class="chat-input-row">
+    <input id="chatInput" class="chat-input" type="text" placeholder="Type a question…" onkeydown="if(event.key==='Enter')sendChatInput()" />
+    <button class="chat-send" onclick="sendChatInput()">➤</button>
   </div>
 </div>
 
@@ -1278,6 +1400,180 @@ function sendMail() {
   if(typeof emailjs!=='undefined' && EMAILJS_PUBLIC_KEY!=='YOUR_PUBLIC_KEY'){
     emailjs.init({publicKey: EMAILJS_PUBLIC_KEY});
   }
+</script>
+
+<!-- ══════════ CHATBOT LOGIC ══════════ -->
+<script>
+const WHATSAPP_NUMBER = '916380421140'; // country code + number, no + or spaces
+
+// FAQ knowledge base built from Suresh's resume
+const CHAT_FAQ = [
+  { kw:['hi','hello','hey','hii','helo'], a:"Hey there! 👋 Ask me anything about Suresh's skills, experience, projects, education, or how to contact him." },
+  { kw:['who are you','about you','about suresh','who is suresh','introduce'], a:"Suresh S is a Senior Data Annotator & Onsite Team Lead at ASPL, Bengaluru — 4+ years in data annotation and autonomous vehicle (AV) perception. He specializes in 3D LiDAR cuboid annotation, sensor fusion (Camera+LiDAR+Radar), 2D bounding boxes, semantic segmentation, HD map validation, and QC/team leadership. He's also a Python developer." },
+  { kw:['skill','skills','expertise','good at','core competen'], a:"Core skills:\n• 3D LiDAR Cuboid Annotation\n• Sensor Fusion (Camera+LiDAR+Radar)\n• 2D Bounding Box, Polygon & Polyline\n• Semantic & Instance Segmentation\n• HD Map Validation\n• NLP Annotation\n• QC & Peer Review\n• Team Leadership & Mentoring\n• Python, JavaScript, HTML/CSS\n\nTools: CVAT, AWS SageMaker Ground Truth, NVIDIA UAI/TAO, Kognic, Supervisely, Label Studio, Dataloop." },
+  { kw:['experience','work history','job','career','currently work','current role','current job'], a:"Currently: Senior Data Annotator / Onsite Team Lead at ASPL (Apr 2025–Present), Bengaluru — 97%+ accuracy, leads onsite annotation team, QC & mentoring 10+ junior annotators.\n\nPreviously: Data Annotator at Objectways Technologies (Mar 2024–Mar 2025), Coimbatore — AWS SageMaker Ground Truth, reduced error rates by 20%." },
+  { kw:['project','projects','worked on','portfolio work'], a:"Key projects:\n🚙 AV Perception Dataset — 50,000+ camera/LiDAR frames, 3D cuboids, sensor fusion\n📡 Multi-Sensor Fusion Annotation — Camera+LiDAR+Radar for AEB/ACC\n🛣️ HD Map & Lane Detection Pipeline — improved map accuracy by 18%\n🖼️ Semantic Segmentation Dataset\n🎯 Traffic Sign Recognition Dataset\n🏆 Annotation QC & Training Program — 99%+ accuracy across teams\n\nScroll down to the Projects section to see more ↓" },
+  { kw:['education','degree','qualification','study','college','university'], a:"Education:\n🎓 B.Com (Distance Learning) — Sikkim Manipal University, 2023–Present\n🎓 DAE — Diploma in Automobile Engineering (Rank Holder) — Sri Krishna Institute of Technology, 2019–2022\n🎓 Python Full Stack Developer Training — Refinement Software Solution, Jul–Dec 2023\n🎓 MMV — Government ITI, 2017–2019" },
+  { kw:['certif','certificate','license'], a:"Certifications:\n• AWS Skill Builder — Cloud Fundamentals & Practitioner Essentials\n• Data Analytics & Visualization Job Simulation — Accenture North America (Forage)\n• Figma UI/UX Design Certification — GUVI\n• Rank Holder — DAE, Sri Krishna Institute of Technology" },
+  { kw:['resume','cv','download resume'], a:"Sure! Here's Suresh's resume 📄", link:{text:'📄 Download Resume PDF', href:'Suresh_S_Resume.pdf', download:true} },
+  { kw:['phone','number','call','mobile'], a:"You can call or WhatsApp Suresh at +91 6380421140 📞" },
+  { kw:['location','based','city','where','address'], a:"Suresh is based in Bengaluru, Karnataka, India 📍" },
+  { kw:['email','mail','gmail'], a:"You can email Suresh at sureshpersonal2k26@gmail.com 📧" },
+  { kw:['linkedin'], a:"Here's Suresh's LinkedIn:", link:{text:'🔗 linkedin.com/in/suresh9944', href:'https://www.linkedin.com/in/suresh9944/', download:false} },
+  { kw:['github'], a:"Here's Suresh's GitHub:", link:{text:'🔗 github.com/sureshpersonal2k26-creator', href:'https://github.com/sureshpersonal2k26-creator', download:false} },
+  { kw:['contact','reach','get in touch','connect','hire','available','availability'], a:"You can reach Suresh via:\n📞 Phone/WhatsApp: +91 6380421140\n📧 Email: sureshpersonal2k26@gmail.com\n📍 Bengaluru, Karnataka, India\n\nOr just leave a message right here in the chat — tap '📩 Leave a Message' below and it'll go straight to Suresh." },
+  { kw:['python'], a:"Yes — Suresh is a Python developer too, using it to script annotation pipelines, data preprocessing and automation tools." },
+  { kw:['adas','autonomous','av ','lidar'], a:"Suresh has deep ADAS/AV domain knowledge: Lane Detection, LDW, ACC, AEB, FCW, TSR, object detection & tracking, drivable area mapping, and camera calibration — all applied through his annotation work at ASPL." },
+];
+
+function findChatAnswer(text){
+  const t = text.toLowerCase();
+  for(const item of CHAT_FAQ){
+    if(item.kw.some(k => t.includes(k))) return item;
+  }
+  return null;
+}
+
+function toggleChat(){
+  const panel = document.getElementById('chatPanel');
+  const toggle = document.getElementById('chatToggle');
+  panel.classList.toggle('open');
+  hideMascotBubble();
+  toggle.classList.add('excited');
+  setTimeout(() => toggle.classList.remove('excited'), 1000);
+}
+
+// ── MASCOT SPEECH BUBBLE CYCLE ──────────────────────────────────────────────
+const MASCOT_PHRASES = ["Need any help? 👋","Ask about my LiDAR skills! 🚙","Want my resume? 📄","Say hi! 😊","Curious about ADAS? 🛣️"];
+let mascotPhraseIdx = 0;
+function showMascotBubble(){
+  const panel = document.getElementById('chatPanel');
+  if(panel.classList.contains('open')) return;
+  const bubble = document.getElementById('mascotBubble');
+  bubble.textContent = MASCOT_PHRASES[mascotPhraseIdx % MASCOT_PHRASES.length];
+  mascotPhraseIdx++;
+  bubble.classList.add('show');
+  setTimeout(() => bubble.classList.remove('show'), 3600);
+}
+function hideMascotBubble(){
+  document.getElementById('mascotBubble').classList.remove('show');
+}
+setTimeout(showMascotBubble, 2500);
+setInterval(showMascotBubble, 11000);
+
+function appendChatMsg(text, who){
+  const body = document.getElementById('chatBody');
+  const div = document.createElement('div');
+  div.className = 'chat-msg ' + who;
+  div.textContent = text;
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+  if(who === 'bot'){
+    const toggle = document.getElementById('chatToggle');
+    toggle.classList.add('excited');
+    setTimeout(() => toggle.classList.remove('excited'), 1000);
+  }
+  return div;
+}
+
+function appendChatLink(item){
+  const body = document.getElementById('chatBody');
+  const a = document.createElement('a');
+  a.href = item.link.href;
+  a.textContent = item.link.text;
+  a.target = '_blank';
+  if(item.link.download) a.setAttribute('download','Suresh_S_Resume.pdf');
+  a.className = 'chat-wa-btn';
+  a.style.background = '#2997ff';
+  body.appendChild(a);
+  body.scrollTop = body.scrollHeight;
+}
+
+function askChat(text){
+  appendChatMsg(text, 'user');
+  respondChat(text);
+}
+
+function sendChatInput(){
+  const inp = document.getElementById('chatInput');
+  const val = inp.value.trim();
+  if(!val) return;
+  appendChatMsg(val, 'user');
+  inp.value = '';
+  respondChat(val);
+}
+
+function respondChat(text){
+  setTimeout(() => {
+    const match = findChatAnswer(text);
+    if(match){
+      appendChatMsg(match.a, 'bot');
+      if(match.link) appendChatLink(match);
+    } else {
+      appendChatMsg("I don't have an exact answer for that, but I can pass it straight to Suresh! Tap below to leave a message, or ask about his skills, experience, projects, education or contact details.", 'bot');
+      const body = document.getElementById('chatBody');
+      const btn = document.createElement('div');
+      btn.className = 'chat-quick';
+      btn.style.width = 'fit-content';
+      btn.textContent = '📩 Leave a Message';
+      btn.onclick = openChatLeaveMsg;
+      body.appendChild(btn);
+      body.scrollTop = body.scrollHeight;
+    }
+  }, 350);
+}
+
+function openChatLeaveMsg(){
+  const body = document.getElementById('chatBody');
+  const form = document.createElement('div');
+  form.className = 'chat-form';
+  form.innerHTML = `
+    <input type="text" id="chatName" placeholder="Your name" />
+    <input type="text" id="chatPhone" placeholder="Your phone / WhatsApp number" />
+    <textarea id="chatMsgText" placeholder="What would you like to tell Suresh?"></textarea>
+    <button class="chat-form-btn" onclick="submitChatMsg(this)">Send to Suresh →</button>
+  `;
+  body.appendChild(form);
+  body.scrollTop = body.scrollHeight;
+}
+
+function submitChatMsg(btn){
+  const name = (document.getElementById('chatName').value || '').trim();
+  const phone = (document.getElementById('chatPhone').value || '').trim();
+  const msg = (document.getElementById('chatMsgText').value || '').trim();
+  if(!name || !msg){ alert('Please enter your name and a message.'); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  const finish = () => {
+    const form = btn.closest('.chat-form');
+    form.remove();
+    appendChatMsg(`Thanks, ${name}! Your message has been sent to Suresh's inbox. You can also reach him instantly on WhatsApp below.`, 'bot');
+    const waText = encodeURIComponent(`Hi Suresh, I'm ${name}${phone ? ' ('+phone+')' : ''}. ${msg}`);
+    appendChatLink({ link:{ text:'💬 Continue on WhatsApp', href:`https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`, download:false } });
+  };
+
+  if(typeof EMAILJS_SERVICE_ID !== 'undefined' && EMAILJS_SERVICE_ID !== 'YOUR_SERVICE_ID'){
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      from_name: name,
+      from_email: 'chatbot-visitor@portfolio.site',
+      subject: 'New Chatbot Message from Portfolio',
+      message: `Phone/WhatsApp: ${phone || 'not provided'}\n\nMessage:\n${msg}`,
+      to_email: MY_EMAIL,
+      reply_to: 'chatbot-visitor@portfolio.site'
+    }, EMAILJS_PUBLIC_KEY).then(finish).catch(() => {
+      btn.disabled = false;
+      btn.textContent = 'Send to Suresh →';
+      appendChatMsg("Couldn't send automatically — please tap 'Continue on WhatsApp' instead so your message reaches Suresh.", 'bot');
+      const waText = encodeURIComponent(`Hi Suresh, I'm ${name}${phone ? ' ('+phone+')' : ''}. ${msg}`);
+      appendChatLink({ link:{ text:'💬 Continue on WhatsApp', href:`https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`, download:false } });
+    });
+  } else {
+    // EmailJS not configured yet — fall back straight to WhatsApp
+    finish();
+  }
+}
 </script>
 </body>
 </html>
